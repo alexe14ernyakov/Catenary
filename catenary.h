@@ -20,6 +20,10 @@ public:
     void set_x1(double new_value) {x1 = new_value;}
     void set_x2(double new_value) {x2 = new_value;}
     void set_parameter(double new_value) {a = new_value;}
+    void correct_check();
+    double get_x1() const {return x1;}
+    double get_x2() const {return x2;}
+    double get_parameter() const {return a;}
     double f(double x) const {return a*cosh(x/a);}
     double arc_length() const;
     double curvature_radius(double x) const;

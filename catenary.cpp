@@ -17,6 +17,14 @@ Catenary::Catenary(double value_x1, double value_x2, double parameter) {
     a = parameter;
 }
 
+void Catenary::correct_check() {
+    if(x1 > x2) {
+        double tmp = x2;
+        x2 = x1;
+        x1 = tmp;
+    }
+}
+
 double Catenary::arc_length() const {
     return a*sinh(x2/a) - a*sinh(x1/a);
 }
@@ -41,6 +49,8 @@ Point Catenary::curvature_center(double x0) const{
 double Catenary::trapezoid_area() const{
     return a * a *(sinh(x2/a) - sinh(x1/a));
 }
+
+
 
 
 
