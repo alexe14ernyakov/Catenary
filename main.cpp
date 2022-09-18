@@ -9,7 +9,7 @@ int get_num(T &a){
     return 0;
 }
 void menu();
-void action(Catenary c, int s);
+void action(Catenary &c, int s);
 
 int main() {
     double x1, x2, a;
@@ -47,7 +47,7 @@ void menu(){
     std::cout << ">";
 }
 
-void action(Catenary c, int s){
+void action(Catenary &c, int s){
     switch (s) {
         case 0: break;
         case 1:
