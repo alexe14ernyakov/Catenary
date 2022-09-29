@@ -9,7 +9,7 @@ int get_num(T &a){
     return 0;
 }
 void menu();
-void action(Catenary &c, int s);
+void action(Catenary::Catenary &c, int s);
 
 int main() {
     double x1, x2, a;
@@ -20,7 +20,7 @@ int main() {
     std::cout << "Enter right border (x2) of catenary: ";
     get_num(x2);
 
-    Catenary c(x1, x2, a);
+    Catenary::Catenary c(x1, x2, a);
 
     int s = 1;
     while(s != 0){
@@ -47,7 +47,7 @@ void menu(){
     std::cout << ">";
 }
 
-void action(Catenary &c, int s){
+void action(Catenary::Catenary &c, int s){
     switch (s) {
         case 0: break;
         case 1:
@@ -60,7 +60,6 @@ void action(Catenary &c, int s){
             get_num(x1);
             std::cout << std::endl;
             c.set_x1(x1);
-            c.correct_check();
             break;
         case 3:
             double x2;
@@ -68,7 +67,6 @@ void action(Catenary &c, int s){
             get_num(x2);
             std::cout << std::endl;
             c.set_x2(x2);
-            c.correct_check();
             break;
         case 4:
             double a;
