@@ -1,3 +1,4 @@
+#include <iostream>
 #include "catenary.h"
 
 namespace Catenary{
@@ -23,6 +24,8 @@ namespace Catenary{
             x1 = value_x1;
             x2 = value_x2;
         }
+        if(parameter == 0)
+            throw std::exception();
         a = parameter;
     }
 
@@ -36,6 +39,12 @@ namespace Catenary{
         correct_check();
     }
 
+    void Catenary::set_parameter(double new_value) {
+        if( new_value == 0)
+            throw std::exception();
+        a = new_value;
+    }
+
     double Catenary::manual_integral() const {
         double c = x1;
         double S = 0;
@@ -47,12 +56,12 @@ namespace Catenary{
     }
 
     double Catenary::arc_length() const {
-        return a * sinh(x2 / a) - a * sinh(x1 / a);
-        //return manual_integral();
+        //return a * sinh(x2 / a) - a * sinh(x1 / a);
+        return manual_integral();
     }
 
     double Catenary::curvature_radius(double x) const {
-        return a * cosh(x / a) * cosh(x / a);
+        return abs(a * cosh(x / a) * cosh(x / a));
     }
 
     Point Catenary::curvature_center(double x0) const {
@@ -69,9 +78,10 @@ namespace Catenary{
     }
 
     double Catenary::trapezoid_area() const {
-        return a * a * (sinh(x2 / a) - sinh(x1 / a));
+        return abs(a * a * (sinh(x2 / a) - sinh(x1 / a)));
     }
 }
+
 
 
 

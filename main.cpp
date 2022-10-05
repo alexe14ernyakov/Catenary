@@ -20,13 +20,18 @@ int main() {
     std::cout << "Enter right border (x2) of catenary: ";
     get_num(x2);
 
-    Catenary::Catenary c(x1, x2, a);
-
-    int s = 1;
-    while(s != 0){
-        menu();
-        get_num(s);
-        action(c, s);
+    try{
+        Catenary::Catenary c(x1, x2, a);
+        int s = 1;
+        while(s != 0){
+            menu();
+            get_num(s);
+            action(c, s);
+        }
+    }
+    catch(std::exception& ex){
+        std::cout << ex.what() << std::endl;
+        return 0;
     }
 
     return 0;
