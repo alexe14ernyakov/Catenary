@@ -1,7 +1,8 @@
 #include <iostream>
-#include "catenary.h"
+#include <sstream>
+#include "CatenaryLib.h"
 
-namespace Catenary{
+namespace Catenary {
     void Catenary::correct_check() {
         if (x1 > x2) {
             double tmp = x2;
@@ -20,12 +21,13 @@ namespace Catenary{
         if (value_x1 > value_x2) {
             x1 = value_x2;
             x2 = value_x1;
-        } else {
+        }
+        else {
             x1 = value_x1;
             x2 = value_x2;
         }
-        if(parameter == 0)
-            throw std::exception();
+        if (parameter == 0)
+            throw std::logic_error("Parameter can't be zero...");
         a = parameter;
     }
 
@@ -40,8 +42,8 @@ namespace Catenary{
     }
 
     void Catenary::set_parameter(double new_value) {
-        if( new_value == 0)
-            throw std::exception();
+        if (new_value == 0)
+            throw std::logic_error("Parameter can't be zero...");
         a = new_value;
     }
 
@@ -70,15 +72,19 @@ namespace Catenary{
         double dx = r / sqrt(1 + (1 / (derivative * derivative)));
         double dy = -dx / derivative;
         if (x0 < 0)
-            return {x0 + dx, f(x0) + dy};
+            return { x0 + dx, f(x0) + dy };
         else if (x0 > 0)
-            return {x0 - dx, f(x0) - dy};
+            return { x0 - dx, f(x0) - dy };
         else
-            return {0, f(0) + curvature_radius(0)};
+            return { 0, f(0) + curvature_radius(0) };
     }
 
     double Catenary::trapezoid_area() const {
         return abs(a * a * (sinh(x2 / a) - sinh(x1 / a)));
+    }
+
+    void Catenary::print(std::ostream& buffer) const {
+        buffer << "a = " << get_parameter() << "  x1 = " << get_x1() << "  x2 = " << get_x2() << std::endl;
     }
 }
 

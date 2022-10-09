@@ -16,8 +16,8 @@ namespace Catenary {
             y = value_y;
         }
 
-        double get_x() const {return x;}
-        double get_y() const {return y;}
+        double get_x() const { return x; }
+        double get_y() const { return y; }
     };
 
     class Catenary {
@@ -40,6 +40,7 @@ namespace Catenary {
         double curvature_radius(double x) const;
         Point curvature_center(double x0) const;
         double trapezoid_area() const;
+        void print(std::ostream& str) const;
     };
 }
 

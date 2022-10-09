@@ -1,15 +1,16 @@
 #include <iostream>
-#include "catenary.h"
+#include <sstream>
+#include "../CatenaryLib/CatenaryLib.h"
 
 template <typename T>
-int get_num(T &a){
+int get_num(T& a) {
     std::cin >> a;
-    if(!std::cin.good())
+    if (!std::cin.good())
         return 1;
     return 0;
 }
 void menu();
-void action(Catenary::Catenary &c, int s);
+void action(Catenary::Catenary& c, int s);
 
 int main() {
     double x1, x2, a;
@@ -20,24 +21,24 @@ int main() {
     std::cout << "Enter right border (x2) of catenary: ";
     get_num(x2);
 
-    try{
+    try {
         Catenary::Catenary c(x1, x2, a);
         int s = 1;
-        while(s != 0){
+        while (s != 0) {
             menu();
             get_num(s);
             action(c, s);
         }
     }
-    catch(std::exception& ex){
+    catch (std::exception& ex) {
         std::cout << ex.what() << std::endl;
-        return 0;
+        return 1;
     }
 
     return 0;
 }
 
-void menu(){
+void menu() {
     std::cout << "What do you want to do?" << std::endl;
     std::cout << "0. Exit program " << std::endl;
     std::cout << "1. Check catenary's info " << std::endl;
@@ -52,12 +53,12 @@ void menu(){
     std::cout << ">";
 }
 
-void action(Catenary::Catenary &c, int s){
+void action(Catenary::Catenary& c, int s) {
+    std::ostringstream buffer;
     switch (s) {
         case 0: break;
         case 1:
-            std::cout << "x1=" << c.get_x1() << "\t x2=" << c.get_x2() << "\t a=" << c.get_parameter() << std::endl;
-            std::cout << std::endl;
+            c.print(std::cout);
             break;
         case 2:
             double x1;
